@@ -22,34 +22,19 @@ function readLine() {
     return inputString[currentLine++];
 }
 
-function insertionSort2(n, arr) {
-    let reduce = 0;
-    let insertElem;
-    let swapDone = true;
-    for (let i = 0; i < arr.length; i++) {
-        if (!swapDone) {
-            reduce++;
-        }
-        swapDone = false;
-        insertElem = arr[arr.length - 1 - reduce];
-        for (let j = arr.length - 2 - reduce; j >= 0; j--) {
-            if (arr[j] > insertElem) {
-                arr[j + 1] = arr[j];
-                swapDone = true;
-                console.log(arr.toString().replace(/,/g,' '));
-            } else if (arr[j] < insertElem) {
-                if (arr[j + 1] != insertElem) {
-                    arr[j + 1] = insertElem;
-                    console.log(arr.toString().replace(/,/g,' '));
-                }
-                break;
+function insertionSort2 (n, arr) {
+    let insertelem;
+    for (let i = 1; i < arr.length; i++) {
+        insertelem = arr.splice(i, 1)[0]
+
+        for (let j = i; j >= 0; j--) {
+            if (insertelem > arr[j - 1] || j === 0) {
+                arr.splice(j, 0, insertelem);
+                break
             }
         }
-        //In case the last element is the smallest in the sorted array
-        if (arr[0] > insertElem) {
-            arr[0] = insertElem;
-            console.log(arr.toString().replace(/,/g,' '));
-        }
+
+        console.log(arr.join(' '));
     }
 }
 
